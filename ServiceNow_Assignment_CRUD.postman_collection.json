@@ -1,0 +1,308 @@
+{
+	"info": {
+		"_postman_id": "0bd0be04-0f7f-4536-a4ab-4c61d6782226",
+		"name": "ServiceNow_Assignment_CRUD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17568547"
+	},
+	"item": [
+		{
+			"name": "Post_Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify the Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", () => {\r",
+							"    pm.response.to.have.status(\"Created\");\r",
+							"})\r",
+							"\r",
+							"Resp = pm.response.json();\r",
+							"pm.globals.set(\"System ID\", Resp.result.sys_id);\r",
+							"console.log(\"Successfully created the system id \" +Resp.result.sys_id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\": \"I am learning REST API Automation\",\r\n    \"short_description\": \"At Testleaf\",\r\n    \"notify\":\"3\",\r\n    \"urgency\":\"4\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{SIT}}/api/now/table/incident",
+					"protocol": "https",
+					"host": [
+						"{{SIT}}"
+					],
+					"path": [
+						"api",
+						"now",
+						"table",
+						"incident"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve_RequestID_From_Post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify the GET Request Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "izPMCo=m/cAjRL73",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{SIT}}/api/now/table/incident/{{System ID}}",
+					"protocol": "https",
+					"host": [
+						"{{SIT}}"
+					],
+					"path": [
+						"api",
+						"now",
+						"table",
+						"incident",
+						"{{System ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PutRequest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify the PUT Request Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"notify\": \"2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{SIT}}/api/now/table/incident/{{System ID}}",
+					"protocol": "https",
+					"host": [
+						"{{SIT}}"
+					],
+					"path": [
+						"api",
+						"now",
+						"table",
+						"incident",
+						"{{System ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PatchRequest_Update",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify the PATCH Request Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\": \"Currently, I am using ACER Laptop\",\r\n    \"short_description\": \"ACER Model\",\r\n    \"notify\": \"3\",\r\n    \"severity\": \"2\",\r\n    \"urgency\": \"5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://{{SIT}}/api/now/table/incident/{{System ID}}",
+					"protocol": "https",
+					"host": [
+						"{{SIT}}"
+					],
+					"path": [
+						"api",
+						"now",
+						"table",
+						"incident",
+						"{{System ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteRequest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify the DELETE Request Status code is set to 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{SIT}}/api/now/table/incident/{{System ID}}",
+					"protocol": "https",
+					"host": [
+						"{{SIT}}"
+					],
+					"path": [
+						"api",
+						"now",
+						"table",
+						"incident",
+						"{{System ID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RetrieveAllRequests",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{SIT}}/api/now/table/incident?sysparm_limit",
+					"protocol": "https",
+					"host": [
+						"{{SIT}}"
+					],
+					"path": [
+						"api",
+						"now",
+						"table",
+						"incident"
+					],
+					"query": [
+						{
+							"key": "sysparm_limit",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "izPMCo=m/cAjRL73",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "admin",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
